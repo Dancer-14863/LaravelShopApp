@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -28,9 +29,17 @@ Route::resource('user', UserController::class)->only([
     'store'
 ]);
 
+Route::resource('product', ProductController::class)->only([
+    'index',
+    'show'
+]);
 
 Route::middleware('auth:api')->group(function () {
     Route::resource('user', UserController::class)->except([
         'store'
+    ]);
+    Route::resource('product', ProductController::class)->except([
+        'index',
+        'show'
     ]);
 });
